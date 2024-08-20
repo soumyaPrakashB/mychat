@@ -1,4 +1,5 @@
 package com.websocket.mychat;
+
 public class HelloMessage {
 
     private String name;

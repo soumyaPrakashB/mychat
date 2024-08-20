@@ -27,8 +27,22 @@
         <div class="col-md-6">
             <form class="form-inline">
                 <div class="form-group">
-                    <label for="name">What is your name?</label>
-                    <input type="text" id="name" class="form-control" placeholder="Your name here...">
+                    <label for="recipient">Choose user to chat with:</label>
+                    <select name="users" id="recipient">
+                        <option value="user1">user1</option>
+                        <option value="user2">user2</option>
+                        <option value="user3">user3</option>
+                        <option value="user4">user4</option>
+                    </select>
+                </div>
+                <button id="selectUser" class="btn btn-default" type="submit">Select</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="name">Type your message</label>
+                    <input type="text" id="name" class="form-control" placeholder="message...">
                 </div>
                 <button id="send" class="btn btn-default" type="submit">Send</button>
             </form>

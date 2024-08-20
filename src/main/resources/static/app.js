@@ -2,6 +2,8 @@ const stompClient = new StompJs.Client({
     brokerURL: 'ws://localhost:8081/gs-guide-websocket'
 });
 
+var sendUser;
+
 stompClient.onConnect = (frame) => {
     setConnected(true);
     console.log('Connected: ' + frame);
@@ -48,6 +50,13 @@ function sendName() {
     });
 }
 
+function selectSendUser() {
+    var e = document.getElementById("recipient");
+    sendUser = e.value;
+    console.log("=============");
+    console.log(sendUser);
+}
+
 function showGreeting(message) {
     $("#greetings").append("<tr><td>" + message + "</td></tr>");
 }
@@ -57,4 +66,5 @@ $(function () {
     $( "#connect" ).click(() => connect());
     $( "#disconnect" ).click(() => disconnect());
     $( "#send" ).click(() => sendName());
+    $( "#selectUser" ).click(() => selectSendUser());
 });
