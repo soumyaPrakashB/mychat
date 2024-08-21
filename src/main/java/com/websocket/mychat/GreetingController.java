@@ -1,7 +1,9 @@
 package com.websocket.mychat;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.util.HtmlUtils;
@@ -9,13 +11,17 @@ import org.springframework.web.util.HtmlUtils;
 @Controller
 public class GreetingController {
 
+    @Autowired
+    private SimpMessagingTemplate simpMessagingTemplate;
 
     @MessageMapping("/hello")
-    @SendTo("/topic/greetings")
+//    @SendTo("/topic/greetings")
     @SendToUser
-    public Greeting greeting(HelloMessage message) throws Exception {
+    public void greeting(HelloMessage message) throws Exception {
         Thread.sleep(1000); // simulated delay
-        return new Greeting(HtmlUtils.htmlEscape(message.getName()));
+        simpMessagingTemplate.convertAndSendToUser(message.getTargetUser(), "/user/topic/greetings",
+                message.getName());
+//        return new Greeting(HtmlUtils.htmlEscape(message.getName()));
     }
 
 }
