@@ -16,11 +16,11 @@ public class GreetingController {
 
     @MessageMapping("/hello")
 //    @SendTo("/topic/greetings")
-    @SendToUser
+//    @SendToUser
     public void greeting(HelloMessage message) throws Exception {
         Thread.sleep(1000); // simulated delay
-        simpMessagingTemplate.convertAndSendToUser(message.getTargetUser(), "/user/topic/greetings",
-                message.getName());
+        simpMessagingTemplate.convertAndSendToUser(message.getTargetUser(), "/queue/specific-user",
+                new Greeting(HtmlUtils.htmlEscape(message.getName())));
 //        return new Greeting(HtmlUtils.htmlEscape(message.getName()));
     }
 

@@ -7,8 +7,10 @@ var sendUser;
 stompClient.onConnect = (frame) => {
     setConnected(true);
     console.log('Connected: ' + frame);
-    stompClient.subscribe('/user/topic/greetings', (greeting) => {
-        showGreeting(greeting);
+    stompClient.subscribe('/user/queue/specific-user', (greeting) => {
+        console.log("----");
+        console.log(greeting);
+        showGreeting(JSON.parse(greeting.body).content);
     });
 };
 
